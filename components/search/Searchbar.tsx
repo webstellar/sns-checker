@@ -24,14 +24,17 @@ const Searchbar = () => {
     const { pubkey } = getDomainKeySync(domain); //public key
     console.log("pubkey: " + pubkey);
 
-    const { registry, nftOwner } = await NameRegistryState.retrieve(
-      connection,
-      pubkey
-    );
+    const data = await NameRegistryState.retrieve(connection, pubkey);
 
-    const owner = (
-      await NameRegistryState.retrieve(connection, pubkey)
-    ).registry.owner.toBase58();
+    try {
+      const owner = (
+        await NameRegistryState.retrieve(connection, pubkey)
+      ).registry.owner.toBase58();
+      setResult(owner);
+    } catch (error) {
+      console.error(error);
+      setResult("");
+    }
 
     //const profilePicture = await getPicRecord(connection, pubkey.toBase58());
     /*
@@ -45,9 +48,6 @@ const Searchbar = () => {
     return () => (mounted.current = false);
 */
 
-    setResult(owner);
-    console.log(registry);
-    console.log(nftOwner);
     //console.log(profilePicture);
   }
 
@@ -56,7 +56,7 @@ const Searchbar = () => {
       <div className="-z-[1] opacity-100">
         <Image
           className="object-cover"
-          src="/herobackgroundImage.jpg"
+          src="/backgroundImage.jpg"
           alt="background image"
           fill={true}
         />
@@ -96,8 +96,8 @@ const Searchbar = () => {
           </div>
         </form>
 
-        {result && (
-          <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
+          {result ? (
             <div className="relative flex max-w-[500px] h-[430px] w-full flex-col rounded-[10px] border-[1px] border-gray-200 bg-gray-800 bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
               <div className="flex h-fit w-full items-center justify-between rounded-t-2xl bg-gray-800 px-4 pb-[20px] pt-4 shadow-2xl shadow-gray-100 dark:!bg-navy-700 dark:shadow-none">
                 <h4 className="text-lg font-bold text-navy-700 dark:text-white">
@@ -187,8 +187,10 @@ const Searchbar = () => {
                 </table>
               </div>
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="text-white text-center">Not result found!</div>
+          )}
+        </div>
       </div>
     </div>
   );
