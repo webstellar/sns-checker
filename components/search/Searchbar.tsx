@@ -178,7 +178,7 @@ const Searchbar = () => {
                             className="flex h-full items-center justify-center rounded-md bg-brand-500 dark:bg-brand-400"
                             style={{ width: "30%" }}
                           >
-                            {result && $400}
+                            {result && "$400"}
                           </div>
                         </div>
                       </td>
