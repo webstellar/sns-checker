@@ -30,20 +30,6 @@ const Searchbar = () => {
       console.error(error);
       setResult("");
     }
-
-    //const profilePicture = await getPicRecord(connection, pubkey.toBase58());
-    /*
-    if (!registry.data) {
-      return setPics(""); // Provide a default value for setPics state variable
-    }
-
-    if (mounted.current) {
-      setPics(profilePicture?.data?.toString("utf-8"));
-    }
-    return () => (mounted.current = false);
-*/
-
-    //console.log(profilePicture);
   }
 
   return (
