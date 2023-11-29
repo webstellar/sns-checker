@@ -93,14 +93,14 @@ const Searchbar = () => {
 
         <div className="flex flex-col justify-center items-center">
           {result ? (
-            <div className="gap-y-14 relative flex max-w-[500px] h-[360px] w-full md:w-[500px] flex-col rounded-[10px] border-[1px] border-gray-200 bg-gray-800 bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
-              <div className="flex h-fit w-full items-center justify-between rounded-t-2xl bg-gray-800 px-4 pt-4 shadow-2xl shadow-gray-100 dark:!bg-navy-700 dark:shadow-none">
+            <div className="gap-y-8 relative flex max-w-[500px] h-[360px] w-full md:w-[500px] flex-col rounded-[10px] border-[1px] border-gray-200 bg-gray-800 bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+              <div className="flex h-fit w-full items-center justify-between rounded-t-2xl bg-gray-800 px-8 pt-8 shadow-2xl shadow-gray-100 dark:!bg-navy-700 dark:shadow-none">
                 <h4 className="text-2xl font-bold text-navy-700 dark:text-white">
                   Domain Info
                 </h4>
               </div>
 
-              <div className="flex flex-col justify-start items-start px-4 gap-y-5">
+              <div className="flex flex-col justify-start items-start px-8 pb-8 gap-y-5">
                 <div className="flex flex-col gap-1 items-start">
                   <div className="text-xl font-semibold">Owner</div>
                   <div>{result}</div>
