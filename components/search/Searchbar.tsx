@@ -51,7 +51,7 @@ const Searchbar = () => {
       </div>
       <div className="pt-2 mx-auto max-w-6xl text-gray-100 flex flex-col gap-y-5 justify-center items-center px-5 md:px-0">
         <h1 className="font-semibold text-2xl">Free SNS Appraisal</h1>
-        <p className="font-normal text-lg">
+        <p className="font-normal text-lg text-center">
           Use our free valuator tool to determine a domain value…
         </p>
         <form onSubmit={onSubmit}>
@@ -99,9 +99,9 @@ const Searchbar = () => {
                 <div className="flex flex-col justify-start items-start px-8 pb-8 gap-y-5">
                   <div className="flex flex-col flex-wrap gap-2">
                     <div className="text-xl font-semibold">Owner</div>
-                    <div className="text-wrap break-words">
+                    <div className="break-all">
                       {result
-                        ? result
+                        ? String(result)
                         : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                     </div>
                   </div>
@@ -114,7 +114,7 @@ const Searchbar = () => {
                     <div className="text-xl font-semibold">Value</div>
                     <div className="space-y-3">
                       approx. $400
-                      <p className="text-xs italic font-serif mt-1">
+                      <p className="text-xs italic font-mono mt-4">
                         the .sol value is estimated not actual
                       </p>
                     </div>
