@@ -4,39 +4,21 @@ import Image from "next/image";
 import React, { useState, FormEvent, useRef } from "react";
 import { getDomainKeySync, NameRegistryState } from "@bonfida/spl-name-service";
 import { Connection } from "@solana/web3.js";
+import { useDomainAutoSuggest } from "@/hooks/useDomainAutoSuggest";
 
 const SHYFT_RPC = "https://rpc.shyft.to?api_key=hPg7Kx6w4aHXnozf";
 
-const Searchbar = () => {
+const SearchApi = () => {
   let connection = new Connection(SHYFT_RPC); //get solana
-  const [loading, setLoading] = useState<Boolean>(false);
+  const [loading, setLoading] = useState<Boolean>(true);
   const [domain, setDomain] = useState<string>("");
-  const [result, setResult] = useState<string>("");
+  const result = useDomainAutoSuggest(domain);
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+  console.log(result);
+
+  async function onSearch(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setLoading(true);
-    const { pubkey } = getDomainKeySync(domain); //public key
-
-    try {
-      const owner = (
-        await NameRegistryState.retrieve(connection, pubkey)
-      ).registry.owner.toBase58();
-
-      const registryState = await NameRegistryState.retrieve(
-        connection,
-        pubkey
-      );
-      const data = registryState.registry.data;
-
-      console.log(data);
-
-      setLoading(false);
-      setResult(owner);
-    } catch (error) {
-      console.error(error);
-      setResult("");
-    }
+    setLoading(false);
   }
 
   return (
@@ -54,7 +36,7 @@ const Searchbar = () => {
         <p className="font-normal text-lg">
           Use our free valuator tool to determine a domain value…
         </p>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSearch}>
           <div className="relative w-full">
             <input
               type="search"
@@ -84,11 +66,11 @@ const Searchbar = () => {
           </div>
         </form>
 
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center mx-auto">
           {loading ? (
             <div className="text-white text-center">Loading...</div>
           ) : (
-            <div className="transition-all gap-y-8 relative flex flex-col w-auto h-auto rounded-[10px] border-[1px] border-gray-200 bg-gray-800 bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+            <div className="transition-all gap-y-4 sm:gap-y-8 relative flex h-auto w-full sm:max-w-[500px] flex-col rounded-[10px] border-[1px] border-gray-200 bg-gray-800 bg-clip-border shadow-md shadow-[#F3F3F3] px-4 sm:px-0 dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
               <div className="flex h-fit w-full items-center justify-between rounded-t-2xl bg-gray-800 px-8 pt-8 shadow-2xl shadow-gray-100 dark:!bg-navy-700 dark:shadow-none">
                 <h4 className="text-2xl font-bold text-navy-700 dark:text-white">
                   Domain Info
@@ -96,27 +78,24 @@ const Searchbar = () => {
               </div>
 
               <div className="flex flex-col justify-start items-start px-8 pb-8 gap-y-5">
-                <div className="flex flex-col flex-wrap gap-2">
+                <div className="flex flex-col gap-1 items-start">
                   <div className="text-xl font-semibold">Owner</div>
-                  <div className="text-wrap break-words">
-                    {result
-                      ? result
-                      : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                  </div>
+                  {result && result[0] && (
+                    <div className="flex flex-wrap">
+                      {result[0].owner_key ?? ""}
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-1 items-start">
                   <div className="text-xl font-semibold">Domain (.sol)</div>
-                  <div>{domain ? domain : "No domain name"}</div>
+                  {result && result[0] && (
+                    <div>{result[0].domain_name ?? ""}</div>
+                  )}
                 </div>
                 <div className="flex flex-col gap-1 items-start">
-                  <div className="text-xl font-semibold">Value</div>
-                  <div className="space-y-3">
-                    approx. $400
-                    <p className="text-xs italic font-serif mt-1">
-                      the .sol value is estimated not actual
-                    </p>
-                  </div>
+                  <div className="text-xl font-semibold">Value</div>$
+                  {result && result[0] && <div>{result[0].price ?? ""}</div>}
                 </div>
               </div>
             </div>
@@ -127,4 +106,4 @@ const Searchbar = () => {
   );
 };
 
-export default Searchbar;
+export default SearchApi;
