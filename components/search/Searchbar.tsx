@@ -40,7 +40,7 @@ const Searchbar = () => {
   }
 
   return (
-    <div className="mx-auto flex gap-x-20 gap-y-8 items-center justify-around h-screen relative">
+    <div className="mx-auto flex md:gap-x-20 gap-y-8 items-center justify-around h-screen relative">
       <div className="-z-[1] opacity-100">
         <Image
           className="object-cover"
@@ -88,38 +88,40 @@ const Searchbar = () => {
           {loading ? (
             <div className="text-white text-center">Loading...</div>
           ) : (
-            <div className="transition-all gap-y-8 relative flex flex-col w-auto h-auto rounded-[10px] border-[1px] border-gray-200 bg-gray-800 bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
-              <div className="flex h-fit w-full items-center justify-between rounded-t-2xl bg-gray-800 px-8 pt-8 shadow-2xl shadow-gray-100 dark:!bg-navy-700 dark:shadow-none">
-                <h4 className="text-2xl font-bold text-navy-700 dark:text-white">
-                  Domain Info
-                </h4>
-              </div>
-
-              <div className="flex flex-col justify-start items-start px-8 pb-8 gap-y-5">
-                <div className="flex flex-col flex-wrap gap-2">
-                  <div className="text-xl font-semibold">Owner</div>
-                  <div className="text-wrap break-words">
-                    {result
-                      ? result
-                      : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-                  </div>
+            <>
+              <div className="mx-auto transition-all gap-y-8 relative flex flex-col w-auto h-auto rounded-[10px] border-[1px] border-gray-200 bg-gray-800 bg-clip-border shadow-md shadow-[#F3F3F3] dark:border-[#ffffff33] dark:!bg-navy-800 dark:text-white dark:shadow-none">
+                <div className="flex h-fit w-full items-center justify-between rounded-t-2xl bg-gray-800 px-8 pt-8 shadow-2xl shadow-gray-100 dark:!bg-navy-700 dark:shadow-none">
+                  <h4 className="text-2xl font-bold text-navy-700 dark:text-white">
+                    Domain Info
+                  </h4>
                 </div>
 
-                <div className="flex flex-col gap-1 items-start">
-                  <div className="text-xl font-semibold">Domain (.sol)</div>
-                  <div>{domain ? domain : "No domain name"}</div>
-                </div>
-                <div className="flex flex-col gap-1 items-start">
-                  <div className="text-xl font-semibold">Value</div>
-                  <div className="space-y-3">
-                    approx. $400
-                    <p className="text-xs italic font-serif mt-1">
-                      the .sol value is estimated not actual
-                    </p>
+                <div className="flex flex-col justify-start items-start px-8 pb-8 gap-y-5">
+                  <div className="flex flex-col flex-wrap gap-2">
+                    <div className="text-xl font-semibold">Owner</div>
+                    <div className="text-wrap break-words">
+                      {result
+                        ? result
+                        : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-1 items-start">
+                    <div className="text-xl font-semibold">Domain (.sol)</div>
+                    <div>{domain ? domain : "No domain name"}</div>
+                  </div>
+                  <div className="flex flex-col gap-1 items-start">
+                    <div className="text-xl font-semibold">Value</div>
+                    <div className="space-y-3">
+                      approx. $400
+                      <p className="text-xs italic font-serif mt-1">
+                        the .sol value is estimated not actual
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </>
           )}
         </div>
       </div>
