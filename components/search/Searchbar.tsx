@@ -100,9 +100,7 @@ const Searchbar = () => {
                   <div className="flex flex-col flex-wrap gap-2">
                     <div className="text-xl font-semibold">Owner</div>
                     <div className="break-all">
-                      {result
-                        ? String(result)
-                        : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                      {result ? String(result) : "No data"}
                     </div>
                   </div>
 
