@@ -49,7 +49,7 @@ const Searchbar = () => {
           fill={true}
         />
       </div>
-      <div className="pt-2 mx-auto max-w-6xl text-gray-100 flex flex-col gap-y-5 justify-center items-center">
+      <div className="pt-2 mx-auto max-w-6xl text-gray-100 flex flex-col gap-y-5 justify-center items-center px-5 md:px-0">
         <h1 className="font-semibold text-2xl">Free SNS Appraisal</h1>
         <p className="font-normal text-lg">
           Use our free valuator tool to determine a domain value…
